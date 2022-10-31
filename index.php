@@ -13,8 +13,8 @@
 
 <body>
   <?php
-  include("Servidor.php");
-  $dns = new Servidor()
+  include("./modelos/Servidor.php");
+  $dns = new Servidor("SERVER DNS",1,"192.168.100.3");
   
   ?>
   <header>
@@ -35,20 +35,46 @@
 
   <section class="wrapper contenido">
     <div class="contenedor">
-      <a href="#">
+      <a  <?php 
+      echo 'href= "./views/dashboard.php?serverIp='.$dns->Ip.'"';
+      ?>>
         <div class="tarjeta rgb" data-tilt data-tilt-scale="1.1">
           <div class="card-image" style="background-image: url(./imagenes/dns.png);"></div>
           <div class="card-text">
-            <span class="date" >Activo</span>
-            <img src="./imagenes/switch-on.png" class="status" alt="">
-            <h2>Servidor WEB</h2>
-            <p>Lorem ipsum dolor sit amet consectetur, Ducimus, repudiandae temporibus omnis illum maxime quod deserunt
-              eligendi dolor</p>
+            <span class="date" >
+              <?php
+              if($dns->state == 0)
+              {
+                echo "OFF";
+                $dns->color = "red";
+              }
+              else{
+                echo "ON";
+                $dns->color = "green";
+              }
+              
+              ?>
+              
+            </span>
+            
+            <div id="container-circle">
+              
+              <div class="circle" <?php  echo 'style="animation-delay: 0s;background-color:'.$dns->color.'"';?>></div>
+              <div class="circle" <?php  echo 'style="animation-delay: 0s;background-color:'.$dns->color.'"';?>></div>
+              <div class="circle" <?php  echo 'style="animation-delay: 0s;background-color:'.$dns->color.'"';?>></div>
+              <div class="circle" <?php  echo 'style="animation-delay: 0s;background-color:'.$dns->color.'"';?>></div>
+            </div>
+            <h2>
+              <?php echo "SERVER DNS"; ?>
+            </h2>
+            <p>
+              
+            </p>
           </div>
 
           <div class="card-stats">
             <div class="stat">
-              <div class="value">192.168.100.4</div>
+              <div class="value"><?php echo $dns->Ip;?></div>
               <div class="type">Direccion IPv4</div>
             </div>
           </div>
