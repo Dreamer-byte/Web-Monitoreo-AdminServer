@@ -13,7 +13,7 @@
   
   }
 body{
-  /* background:url("./imagenes/background.jpg"); */
+  background:url("/imagenes/background.jpg");
   overflow-x: hidden;
 }
 
