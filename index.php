@@ -14,9 +14,12 @@
 <body>
   <?php
   include("./modelos/Servidor.php");
-  $dns = new Servidor("SERVER DNS",1,"192.168.100.3");
+  $dns = new Servidor("SERVER DNS","192.168.100.3");
+  $dns->Comprobarconexion();
+  $dns->state = "ON";
   
   ?>
+
   <header>
     <section class="wrapper algo">
       <nav class="nav">
@@ -36,23 +39,23 @@
   <section class="wrapper contenido">
     <div class="contenedor">
       <a  <?php 
-      echo 'href= "./views/dashboard.php?serverIp='.$dns->Ip.'"';
+      // echo 'href= "./views/dashboard.php?serverIp='.$dns->Ip.'&nameServer='.$dns->NameServer.'"';
+      if($dns->state == "ON")
+      {
+        echo 'href= "./dashboard/administracion.php?ServerIP='.$dns->Ip.'&nameServer='.$dns->NameServer.'"';
+      }
+      else
+      {
+        echo 'href="#"';
+      }
+      
       ?>>
         <div class="tarjeta rgb" data-tilt data-tilt-scale="1.1">
           <div class="card-image" style="background-image: url(./imagenes/dns.png);"></div>
           <div class="card-text">
-            <span class="date" >
+            <span class="date" <?php  echo 'style="color:'.$dns->color.'"';?> >
               <?php
-              if($dns->state == 0)
-              {
-                echo "OFF";
-                $dns->color = "red";
-              }
-              else{
-                echo "ON";
-                $dns->color = "green";
-              }
-              
+              echo $dns->state;
               ?>
               
             </span>
@@ -60,12 +63,12 @@
             <div id="container-circle">
               
               <div class="circle" <?php  echo 'style="animation-delay: 0s;background-color:'.$dns->color.'"';?>></div>
-              <div class="circle" <?php  echo 'style="animation-delay: 0s;background-color:'.$dns->color.'"';?>></div>
-              <div class="circle" <?php  echo 'style="animation-delay: 0s;background-color:'.$dns->color.'"';?>></div>
-              <div class="circle" <?php  echo 'style="animation-delay: 0s;background-color:'.$dns->color.'"';?>></div>
+              <div class="circle" <?php  echo 'style="animation-delay: 1s;background-color:'.$dns->color.'"';?>></div>
+              <div class="circle" <?php  echo 'style="animation-delay: 2s;background-color:'.$dns->color.'"';?>></div>
+              <div class="circle" <?php  echo 'style="animation-delay: 3s;background-color:'.$dns->color.'"';?>></div>
             </div>
             <h2>
-              <?php echo "SERVER DNS"; ?>
+              <?php echo $dns->NameServer; ?>
             </h2>
             <p>
               
@@ -95,9 +98,9 @@
             <div id="container-circle">
               
               <div class="circle" style="animation-delay: 0s;background-color: green;"></div>
+              <div class="circle" style="animation-delay: 0.5s;background-color: green;"></div>
               <div class="circle" style="animation-delay: 1s;background-color: green;"></div>
-              <div class="circle" style="animation-delay: 2s;background-color: green;"></div>
-              <div class="circle" style="animation-delay: 3s;background-color: green;"></div>
+              <div class="circle" style="animation-delay: 1.5s;background-color: green;"></div>
             </div>
 
             <h2>Servidor WEB</h2>
